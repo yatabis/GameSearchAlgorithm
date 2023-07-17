@@ -122,9 +122,10 @@ fn greedy_action(state: &State) -> usize {
 }
 
 fn test_ai_score(game_number: i32) {
+    let mut rng_for_construct = SmallRng::seed_from_u64(0);
     let mut score_mean = 0.0;
     for _ in 0..game_number {
-        let mut state = MazeState::new(0);
+        let mut state = MazeState::new(rng_for_construct.next_u64());
         while !state.is_done() {
             state.advance(greedy_action(&state));
         }

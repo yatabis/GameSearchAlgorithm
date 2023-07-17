@@ -101,12 +101,13 @@ fn random_action(state: &State, rng: &mut SmallRng) -> usize {
 }
 
 fn test_ai_score(game_number: i32) {
-    let mut rng = SmallRng::seed_from_u64(0);
+    let mut rng_for_action = SmallRng::seed_from_u64(0);
+    let mut rng_for_construct = SmallRng::seed_from_u64(0);
     let mut score_mean = 0.0;
     for _ in 0..game_number {
-        let mut state = MazeState::new(0);
+        let mut state = MazeState::new(rng_for_construct.next_u64());
         while !state.is_done() {
-            state.advance(random_action(&state, &mut rng));
+            state.advance(random_action(&state, &mut rng_for_action));
         }
         let score = state.game_score;
         score_mean += score as f64;
