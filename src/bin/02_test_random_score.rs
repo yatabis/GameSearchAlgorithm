@@ -38,7 +38,7 @@ impl MazeState {
         for y in 0..H {
             for x in 0..W {
                 if y == character.y && x == character.x { continue; }
-                points[y][x] = rng_for_construct.next_u32() as i32 % 10;
+                points[y][x] = (rng_for_construct.next_u32() % 10) as i32;
             }
         }
         Self {
